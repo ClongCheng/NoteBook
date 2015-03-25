@@ -4,6 +4,6 @@
     that I think interesting.
 
 ####Picture show :
-
+<img src="Screenshot/Screenshot_1.png" width="40%" height="20%" alt="Preview List">
 
 
