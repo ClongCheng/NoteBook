@@ -1,2 +1,2 @@
-﻿My Test Android Project 1.0
-﻿===
+My Test Android Project 1.0
+===
