@@ -5,5 +5,6 @@
 
 ####Picture show :
 <img src="Screenshot/Screenshot_1.png" width="40%" height="20%" alt="Preview List">
-
+<img src="Screenshot/Screenshot_2.png" width="40%" height="20%" alt="Delete Item">
+<img src="Screenshot/Screenshot_2.png" width="40%" height="20%" alt="Delete Item">
 
