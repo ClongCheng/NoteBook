@@ -83,10 +83,7 @@ public class NoteListFragment extends ListFragment {
 			ActivityCollector.finishAll();
 			return true;
 			
-		case R.id.upload:
-			/*UploadUtil test = new UploadUtil(getActivity().getApplicationContext());
-			
-			test.uploadFile("/data/data/com.chengl.app.notebook/files/note.json", "http://10.0.2.2:8080/test/DoTest");*/
+		case R.id.upload:			
 			UploadUtil.uploaddata();
 			Toast.makeText(getActivity(), "Upload Success!", Toast.LENGTH_SHORT).show();
 			return true;

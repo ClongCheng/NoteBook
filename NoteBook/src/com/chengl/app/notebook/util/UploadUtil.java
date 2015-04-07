@@ -18,14 +18,7 @@ import android.widget.Toast;
 public class UploadUtil {
 	private static final String TAG = "uploadFile";
 	private static final int TIME_OUT = 10 * 1000;
-	private static final String CHARSET = "utf-8";
-/*	private static Context mContext;
-	
-	
-	
-	public UploadUtil(Context c) {		
-		mContext = c;
-	}*/
+	private static final String CHARSET = "utf-8";	
 	
 	public static void uploaddata() {
     	
@@ -34,7 +27,6 @@ public class UploadUtil {
 			@Override
 			protected String doInBackground(String... params) {
 				UploadUtil upload = new UploadUtil();
-				//File file = new File("/data/data/com.chengl.uploadfile/note.json");
 				String result = upload.uploadFile("/data/data/com.chengl.app.notebook/files/note.json", "http://10.0.2.2:8080/test/DoTest");
 
 				return result;
@@ -55,9 +47,6 @@ public class UploadUtil {
 	public static String uploadFile(String filePath, String requestURL) {
 		
 		String result = "";
-		String BOUNDARY = UUID.randomUUID().toString();
-		String PREFIX = "--", LINE_END = "\r\n";
-		String CONTENT_TYPE = "multipart/form-data";
 		File file = new File(filePath);
 		
 		try {
@@ -71,7 +60,6 @@ public class UploadUtil {
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Charset", CHARSET);
 			connection.setRequestProperty("connection", "keep-alive");
-			connection.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" +BOUNDARY);
 			Log.d("test", "1");
 			
 			if (filePath != null) {
@@ -79,17 +67,9 @@ public class UploadUtil {
 				DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 				StringBuffer sb = new StringBuffer();
 				Log.d("test", "3");
-				//sb.append(PREFIX);
-				//sb.append(BOUNDARY);
-				//sb.append(LINE_END);
 				Log.d("test", "4");
-				String test = "Content-Disposition: form-data; " + LINE_END;
-				Log.d(TAG, test);
 				Log.d("test", "5");
-				//sb.append("Content-Disposition: form-data; " + LINE_END);
-				//sb.append(LINE_END);
 				Log.d("test", "6");
-				//dos.write(sb.toString().getBytes());
 				InputStream is = new FileInputStream(filePath);
 				byte[] bytes = new byte[1024];
 				int len = 0;
@@ -98,9 +78,6 @@ public class UploadUtil {
 				}
 				Log.d("test", "7");
 				is.close();
-				dos.write(LINE_END.getBytes());
-				byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
-				//dos.write(end_data);
 				dos.flush();
 				Log.d("test", "8");
 				int res = connection.getResponseCode();
