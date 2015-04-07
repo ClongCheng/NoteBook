@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.UUID;
 import android.content.Context;
@@ -50,39 +51,21 @@ public class UploadUtil {
 		File file = new File(filePath);
 		
 		try {
-			URL url = new URL(requestURL);
-			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-			connection.setConnectTimeout(TIME_OUT);
-			connection.setReadTimeout(TIME_OUT);
-			connection.setDoInput(true);
-			connection.setDoOutput(true);
-			connection.setUseCaches(false);
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Charset", CHARSET);
-			connection.setRequestProperty("connection", "keep-alive");
-			Log.d("test", "1");
+			HttpURLConnection connection = initHttpURLConn(requestURL);
 			
 			if (filePath != null) {
-				Log.d("test", "2");
 				DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 				StringBuffer sb = new StringBuffer();
-				Log.d("test", "3");
-				Log.d("test", "4");
-				Log.d("test", "5");
-				Log.d("test", "6");
 				InputStream is = new FileInputStream(filePath);
 				byte[] bytes = new byte[1024];
 				int len = 0;
 				while ((len = is.read(bytes)) != -1) {
 					dos.write(bytes, 0, len);
 				}
-				Log.d("test", "7");
-				is.close();
 				dos.flush();
-				Log.d("test", "8");
+				is.close();
 				int res = connection.getResponseCode();
 				Log.e(TAG, "response code:" + res);
-				Log.d("test", "9");
 				if (res == 200) {
 					Log.e(TAG, "request success");
 					InputStream input = connection.getInputStream();
@@ -107,5 +90,20 @@ public class UploadUtil {
 		
 		return result;
 		
+	}
+	
+	private static HttpURLConnection initHttpURLConn(String requestURL)
+			throws MalformedURLException, IOException, ProtocolException {
+		URL url = new URL(requestURL);
+		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+		connection.setConnectTimeout(TIME_OUT);
+		connection.setReadTimeout(TIME_OUT);
+		connection.setDoInput(true);
+		connection.setDoOutput(true);
+		connection.setUseCaches(false);
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Charset", CHARSET);
+		connection.setRequestProperty("connection", "keep-alive");
+		return connection;
 	}
 }
