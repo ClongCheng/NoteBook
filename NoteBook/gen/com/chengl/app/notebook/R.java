@@ -23,7 +23,7 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f050006;
         public static final int add_new_item=0x7f050008;
-        public static final int edit_item=0x7f05000a;
+        public static final int edit_item=0x7f05000b;
         public static final int finish=0x7f050009;
         public static final int fragmentContainer=0x7f050001;
         public static final int menu_list_delete_note=0x7f050007;
@@ -31,6 +31,7 @@ public final class R {
         public static final int note_edit=0x7f050003;
         public static final int note_title=0x7f050002;
         public static final int note_title_review=0x7f050004;
+        public static final int upload=0x7f05000a;
         public static final int viewPager=0x7f050000;
     }
     public static final class layout {
@@ -57,6 +58,7 @@ public final class R {
         public static final int exit_app=0x7f060004;
         public static final int hello_world=0x7f060001;
         public static final int title_hint=0x7f060007;
+        public static final int upload=0x7f060009;
     }
     public static final class style {
         /** 

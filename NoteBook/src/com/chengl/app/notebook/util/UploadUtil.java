@@ -9,20 +9,56 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
-
+import android.content.Context;
+import android.os.AsyncTask;
+import android.text.GetChars;
 import android.util.Log;
+import android.widget.Toast;
 
 public class UploadUtil {
 	private static final String TAG = "uploadFile";
 	private static final int TIME_OUT = 10 * 1000;
 	private static final String CHARSET = "utf-8";
+/*	private static Context mContext;
 	
-	public static String uploadFile(File file, String requestURL) {
+	
+	
+	public UploadUtil(Context c) {		
+		mContext = c;
+	}*/
+	
+	public static void uploaddata() {
+    	
+    	new AsyncTask<String, Void, String>() {
+
+			@Override
+			protected String doInBackground(String... params) {
+				UploadUtil upload = new UploadUtil();
+				//File file = new File("/data/data/com.chengl.uploadfile/note.json");
+				String result = upload.uploadFile("/data/data/com.chengl.app.notebook/files/note.json", "http://10.0.2.2:8080/test/DoTest");
+
+				return result;
+			}
+
+			@Override
+			protected void onPostExecute(String result) {
+				// TODO Auto-generated method stub
+				Log.d("result", result);
+			}
+    		
+    		
+		}.execute();
+    	
+    }
+
+
+	public static String uploadFile(String filePath, String requestURL) {
 		
 		String result = "";
 		String BOUNDARY = UUID.randomUUID().toString();
 		String PREFIX = "--", LINE_END = "\r\n";
 		String CONTENT_TYPE = "multipart/form-data";
+		File file = new File(filePath);
 		
 		try {
 			URL url = new URL(requestURL);
@@ -38,7 +74,7 @@ public class UploadUtil {
 			connection.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" +BOUNDARY);
 			Log.d("test", "1");
 			
-			if (file != null) {
+			if (filePath != null) {
 				Log.d("test", "2");
 				DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 				StringBuffer sb = new StringBuffer();
@@ -54,7 +90,7 @@ public class UploadUtil {
 				//sb.append(LINE_END);
 				Log.d("test", "6");
 				//dos.write(sb.toString().getBytes());
-				InputStream is = new FileInputStream(file);
+				InputStream is = new FileInputStream(filePath);
 				byte[] bytes = new byte[1024];
 				int len = 0;
 				while ((len = is.read(bytes)) != -1) {
@@ -81,7 +117,8 @@ public class UploadUtil {
 					
 					result = sb1.toString();
 					Log.d(TAG, "result: " + result);
-					
+										
+					input.close();
 				}
 			}
 			
@@ -89,7 +126,7 @@ public class UploadUtil {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 		
 		return result;
 		

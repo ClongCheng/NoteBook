@@ -9,5 +9,10 @@
         android:id="@+id/finish"
         android:title="@string/exit_app"
         android:showAsAction="never"/>
+    
+    <item 
+        android:id="@+id/upload"
+        android:title="@string/upload"
+        android:showAsAction="never"/>
 
 </menu>

@@ -10,5 +10,6 @@
     <string name="delete_item">删除</string>
     <string name="title_hint">Please input the title</string>
     <string name="content_hint">Please input the content</string>
+    <string name="upload">上传</string>
 
 </resources>

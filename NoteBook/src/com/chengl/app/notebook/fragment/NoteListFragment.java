@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.chengl.app.notebook.R;
 import com.chengl.app.notebook.activity.NoteEditActivity;
 import com.chengl.app.notebook.activity.NotePagerActivity;
@@ -21,6 +23,7 @@ import com.chengl.app.notebook.model.Note;
 import com.chengl.app.notebook.model.NoteList;
 import com.chengl.app.notebook.util.ActivityCollector;
 import com.chengl.app.notebook.util.LogUtil;
+import com.chengl.app.notebook.util.UploadUtil;
 
 public class NoteListFragment extends ListFragment {
 
@@ -78,6 +81,15 @@ public class NoteListFragment extends ListFragment {
 			return true;
 		case R.id.finish:
 			ActivityCollector.finishAll();
+			return true;
+			
+		case R.id.upload:
+			/*UploadUtil test = new UploadUtil(getActivity().getApplicationContext());
+			
+			test.uploadFile("/data/data/com.chengl.app.notebook/files/note.json", "http://10.0.2.2:8080/test/DoTest");*/
+			UploadUtil.uploaddata();
+			Toast.makeText(getActivity(), "Upload Success!", Toast.LENGTH_SHORT).show();
+			return true;
 			
 		default:
 			return super.onOptionsItemSelected(item);
